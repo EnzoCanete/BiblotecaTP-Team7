@@ -198,9 +198,9 @@
             /* agregado para cerciorarse que el libro5 se elimino */
             biblioteca.ListarLibros();
 
-            // retorna true si el lector fue dado de alta.
-            Console.WriteLine(biblioteca.AltaLector("enrique", 45897060));
-
+            cargarLectores(10);
+            // SI altaLector funciona bien, deberia retornar dos lineas vacias.
+            cargarLectores(2);
 
             void cargarLibros(int cantidad)
             {
@@ -216,6 +216,22 @@
                 }
                 Console.WriteLine();
             }
+
+            void cargarLectores(int cantidad)
+            {
+                bool pude;
+                for (int i = 1; i <= cantidad; i++)
+                {
+                    pude = biblioteca.AltaLector("Lector" + i, 5_000_000 + i);
+
+                    if (pude)
+                    {
+                        Console.WriteLine("Lector" + i + " fue agregado");
+                    }
+                }
+                Console.WriteLine();
+            }
+
         }
     }
 }
