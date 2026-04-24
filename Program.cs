@@ -1,16 +1,16 @@
-﻿namespace BibliotecaTP
+﻿namespace BibliotecaTP_Team7
 {
 
     public class Biblioteca
     {
 
-        private readonly List<Libro> Libros;
+        private readonly List<Libro> LibrosDisponibles;
         private readonly List<Lector> LectoresRegistados;
 
 
         public Biblioteca()
         {
-            this.Libros = [];
+            this.LibrosDisponibles = [];
             this.LectoresRegistados = [];
         }
 
@@ -24,7 +24,7 @@
              */
 
 
-            return Libros.Find(libro => libro.GetTitulo() == titulo);
+            return LibrosDisponibles.Find(libro => libro.GetTitulo() == titulo);
 
 
             /* el metodo original es:
@@ -58,7 +58,7 @@
             if (libro == null)
             {
                 libro = new Libro(titulo, autor, editorial);
-                Libros.Add(libro);
+                LibrosDisponibles.Add(libro);
                 resultado = true;
             }
             return resultado;
@@ -71,7 +71,7 @@
             Console.WriteLine("Estos son los libros de la lista:");
             Console.WriteLine();
 
-            foreach (var libro in Libros)
+            foreach (var libro in LibrosDisponibles)
             {
                 Console.WriteLine(libro);
                 // solo para que el listado se vea un poco mejor.
@@ -88,7 +88,7 @@
             libro = BuscarLibro(titulo);
             if (libro != null)
             {
-                Libros.Remove(libro);
+                LibrosDisponibles.Remove(libro);
                 resultado = true;
             }
             return resultado;
@@ -118,15 +118,46 @@
 
         }
 
+        public string PrestarLibro(string titulo, int dniLector)
+        {
+            Libro LibroAPrestar = BuscarLibro(titulo);
+
+            Lector lector = BuscarLector(dniLector);
+
+            if (lector == null)
+            {
+                return "LECTOR INEXISTENTE";
+            }
+
+            if (LibroAPrestar == null)
+            {
+                return "LIBRO INEXISTENTE";
+            }
+
+            if (lector.Libros.Count == 3)
+            {
+                return "TOPE DE PRESTAMO ALCANZADO";
+            }
+            else
+            {
+                EliminarLibro(titulo);
+                lector.AgregarLibro(LibroAPrestar);
+                return "PRESTAMO EXITOSO";
+            }
+
+        }
+
+
     }
+
 
     public class Libro
     {
-        private string Titulo;
+        private readonly string Titulo;
 
-        private string Autor;
+        private readonly string Autor;
 
-        private string Editorial;
+        private readonly string Editorial;
 
         public Libro(string titulo, string autor, string editorial)
         {
@@ -151,7 +182,7 @@
         // esto tiene que tener un limite de tres libros
         public List<Libro> Libros;
 
-        public string Nombre;
+        public string Nombre { get; set; }
 
         private int dni;
 
@@ -162,18 +193,20 @@
             {
                 // los "_" solo son separadores visuales, no afectan al valor.
                 // Limite inferior teniendo en cuenta a la actual persona mas longeva del pais.
-                if (value < 5_000_000 || value > 99_000_999)
+                if (value < 5_000_000 || value > 99_999_999)
                 {
                     throw new ArgumentException("DNI inválido.");
                 }
+                dni = value;
             }
         }
 
         public Lector(string nombre, int dni)
         {
-            this.Libros = new List<Libro>();
+            this.Libros = [];
             Nombre = nombre;
-            this.dni = dni;
+            Dni = dni;
+
 
         }
 
@@ -182,6 +215,12 @@
             return this.dni;
         }
 
+        public bool AgregarLibro(Libro libro)
+        {
+
+            Libros.Add(libro);
+            return true;
+        }
     }
 
     internal class Test
