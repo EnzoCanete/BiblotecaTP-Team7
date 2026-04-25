@@ -13,6 +13,9 @@ namespace BibliotecaTP_Team7
             biblioteca.AgregarLibro("Rayuela", "Cortazar", "Sudamericana");
             biblioteca.AgregarLibro("1984", "Orwell", "Seix Barral");
 
+            Console.WriteLine("\nInventario de Biblioteca tras la carga inicial de libros:");
+            ListarLibros.MostrarTabla(biblioteca.GetLibrosDisponibles());
+
             // Prueba de alta de lector exitosa y fallida
             Console.WriteLine(biblioteca.AltaLector("Emanuel", 11111111) ? "Lector Emanuel agregado." : "Error: DNI duplicado.");
             Console.WriteLine(biblioteca.AltaLector("Juan", 11111111) ? "Lector Juan agregado." : "Error: DNI duplicado."); // Debe fallar
@@ -31,7 +34,7 @@ namespace BibliotecaTP_Team7
 
             // Verificamos que el libro "El Aleph" desapareció de la biblioteca
             Console.WriteLine("\nInventario de Biblioteca tras el primer préstamo:");
-            biblioteca.ListarLibros();
+            ListarLibros.MostrarTabla(biblioteca.GetLibrosDisponibles());
 
             // Prueba D: Tope de préstamos
             Console.WriteLine("\nForzando el tope de préstamos...");
@@ -41,10 +44,12 @@ namespace BibliotecaTP_Team7
             // Este cuarto préstamo debe ser rechazado
             Console.WriteLine("Préstamo 4 (Debe rebotar): " + biblioteca.PrestarLibro("1984", 11111111));
 
-            // Console.WriteLine("\n--- 3. ESTADO FINAL DEL LECTOR ---");
-            // biblioteca.MostrarEstadoLector("11111111");
+            Console.WriteLine("\n--- 3. ESTADO FINAL DEL LECTOR ---");
+            biblioteca.mostrarEstadoLector(11111111);
 
             Console.ReadLine();
         }
     }
+
+
 }

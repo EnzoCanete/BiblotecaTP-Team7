@@ -59,10 +59,7 @@
             }
             else
             {
-                foreach (var libro in LibrosEnPoder)
-                {
-                    Console.WriteLine("- " + libro.GetTitulo());
-                }
+                ListarLibros.MostrarTabla(LibrosEnPoder);
             }
         }
     }

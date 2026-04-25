@@ -21,9 +21,20 @@
             return this.Titulo;
         }
 
+        public string GetAutor()
+        {
+            return this.Autor;
+        }
+
+        public string GetEditorial()
+        {
+            return this.Editorial;
+        }
+
+
         public override string ToString()
         {
-            return "| Titulo:" + Titulo + " | Autor: " + Autor + " | Editorial: " + Editorial + " |";
+            return $"| {Titulo,-20} | {Autor,-20} | {Editorial,-20} |";
         }
     }
 

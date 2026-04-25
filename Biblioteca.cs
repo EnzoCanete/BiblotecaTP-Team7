@@ -38,19 +38,6 @@
 
         }
 
-        public void ListarLibros()
-        {
-            /* Muestra uno por uno los libros de la lista. */
-            Console.WriteLine("Estos son los libros de la lista:");
-            Console.WriteLine();
-
-            foreach (var libro in LibrosDisponibles)
-            {
-                Console.WriteLine(libro);
-                // solo para que el listado se vea un poco mejor.
-                Console.WriteLine("---------------------------------------------------------");
-            }
-        }
         public bool EliminarLibro(string titulo)
         {
             /* Busca un libro a partir de un titulo, si lo encuentra, lo elimina de la lista.*/
@@ -119,6 +106,21 @@
             }
 
         }
+
+        public void mostrarEstadoLector(int dni)
+        {
+            Lector lector = BuscarLector(dni);
+            if (lector != null)
+            {
+                lector.ListarLibrosEnPoder();
+            }
+        }
+
+        public List<Libro> GetLibrosDisponibles()
+        {
+            return this.LibrosDisponibles;
+        }
+
 
 
     }
