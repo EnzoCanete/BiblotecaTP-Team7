@@ -55,14 +55,14 @@
 
         }
 
-        private Lector BuscarLector(int dni)
+        private Lector BuscarLector(string dni)
         {
             return LectoresRegistados.Find(lector => lector.GetDNI() == dni);
 
         }
 
 
-        public bool AltaLector(string nombreLector, int dniLector)
+        public bool AltaLector(string nombreLector, string dniLector)
         {
             bool resultado = false;
             Lector lector;
@@ -78,7 +78,7 @@
 
         }
 
-        public string PrestarLibro(string titulo, int dniLector)
+        public string PrestarLibro(string titulo, string dniLector)
         {
             Libro LibroAPrestar = BuscarLibro(titulo);
 
@@ -107,7 +107,7 @@
 
         }
 
-        public void mostrarEstadoLector(int dni)
+        public void mostrarEstadoLector(string dni)
         {
             Lector lector = BuscarLector(dni);
             if (lector != null)

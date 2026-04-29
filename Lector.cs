@@ -7,23 +7,9 @@
         // Agregar validación. Solo letras.
         public string Nombre { get; set; }
 
-        private int dni;
+        public string Dni { get; set; }
 
-        public int Dni
-        {
-            get => dni;
-            private set
-            {
-                // los "_" solo son separadores visuales, no afectan al valor.
-                if (value < 1_000_000 || value > 99_999_999)
-                {
-                    throw new ArgumentException("DNI inválido.");
-                }
-                dni = value;
-            }
-        }
-
-        public Lector(string nombre, int dni)
+        public Lector(string nombre, string dni)
         {
             this.LibrosEnPoder = [];
             Nombre = nombre;
@@ -32,9 +18,9 @@
 
         }
 
-        public int GetDNI()
+        public string GetDNI()
         {
-            return this.dni;
+            return this.Dni;
         }
 
         public void AgregarLibro(Libro libro)
